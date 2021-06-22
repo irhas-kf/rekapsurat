@@ -2,81 +2,64 @@
 <?php
 
 class M_read extends CI_Model{
-	function tampil_datafaskes(){
-		$query = $this->db->get('faskes');
-		return $query->result();
-	}
 
 	function tampil_datasurat(){
-		$query = $this->db->get('jenis_surat');
+		$query = $this->db->get('tb_rekap_surat');
 		return $query->result();
 	}
 
 	function rekap_tampil($bulan,$tahun){
-		$query = $this->db->query("SELECT rekap_surat.*,faskes.*,jenis_surat.*
-		FROM rekap_surat
-		JOIN faskes ON faskes.`id_faskes` = rekap_surat.`id_faskes`
-		JOIN jenis_surat ON jenis_surat.`id_jenis_surat` = rekap_surat.`id_jenis_surat`
-		WHERE YEAR(rekap_surat.`tanggal_pengajuan`)='$tahun' AND MONTH(rekap_surat.`tanggal_pengajuan`)='$bulan'
-		ORDER BY rekap_surat.`id_rekap_surat` DESC");
+		$query = $this->db->query("SELECT * FROM tb_rekap_surat
+		WHERE YEAR(tanggal_surat)='$tahun' AND MONTH(tanggal_surat)='$bulan'
+		ORDER BY id_rekap_surat DESC");
 		return $query->result();
 	}
 
 	function rekap_tampil_jenis_surat($bulan,$tahun,$jenis_surat){
-		$query = $this->db->query("SELECT rekap_surat.*,faskes.*,jenis_surat.*
-		FROM rekap_surat
-		JOIN faskes ON faskes.`id_faskes` = rekap_surat.`id_faskes`
-		JOIN jenis_surat ON jenis_surat.`id_jenis_surat` = rekap_surat.`id_jenis_surat`
-		WHERE YEAR(rekap_surat.`tanggal_pengajuan`)='$tahun' AND MONTH(rekap_surat.`tanggal_pengajuan`)='$bulan' AND jenis_surat.`id_jenis_surat`='$jenis_surat'
-		ORDER BY rekap_surat.`id_rekap_surat` DESC");
+		$query = $this->db->query("SELECT * FROM tb_rekap_surat
+		WHERE YEAR(tanggal_surat)='$tahun' AND MONTH(tanggal_surat)='$bulan' AND jenis_surat='$jenis_surat'
+		ORDER BY id_rekap_surat DESC");
 		return $query->result();
 	}
 	function rekap_tampil_jenis_surat_array($jenis_surat){
-		$query = $this->db->query("SELECT * FROM jenis_surat WHERE id_jenis_surat = '$jenis_surat' LIMIT 1");
+		$query = $this->db->query("SELECT jenis_surat FROM tb_rekap_surat WHERE jenis_surat = '$jenis_surat' LIMIT 1");
 		return $query->result_array();
 	}
 
 	function tahun_saatini(){
-		$query = $this->db->query("SELECT YEAR(rekap_surat.`tanggal_pengajuan`) AS tahun
-		FROM rekap_surat
-		GROUP BY rekap_surat.`tanggal_pengajuan`
-		ORDER BY rekap_surat.`tanggal_pengajuan` DESC");
+		$query = $this->db->query("SELECT YEAR(tanggal_surat) AS tahun
+		FROM tb_rekap_surat
+		GROUP BY tanggal_surat
+		ORDER BY tanggal_surat DESC");
 		return $query->result();
 	}
 
 	function bulan_saatini(){
-		$query = $this->db->query("SELECT MONTH(rekap_surat.`tanggal_pengajuan`) AS bulan
-		FROM rekap_surat");
+		$query = $this->db->query("SELECT MONTH(tanggal_surat) AS bulan
+		FROM tb_rekap_surat");
 		return $query->result();
 	}
 
-	function report($x){
-        $query = $this->db->query("SELECT COUNT(id_jenis_surat) AS hasil
-				FROM rekap_surat
-				WHERE id_jenis_surat = '4' AND MONTH(tanggal_pengajuan) = '$x'");
-
-        if($query->num_rows() > 0){
-            foreach($query->result() as $data){
-                $hasil[] = $data;
-            }
-            return $hasil;
-        }
+	function grafikatm(){
+		$query = $this->db->query("SELECT YEAR(tanggal_surat) AS tahun, MONTH(tanggal_surat) AS bulan, COUNT(id_rekap_surat) AS jumlah, jenis_surat FROM tb_rekap_surat
+		WHERE YEAR(tanggal_surat)='2021'");
+		return $query->result();
     }
 
-	public function loadDataGrafik()
-	{
-		// query load data dari grafik
-		return $this->db->select('YEAR(rekap.tanggal_pengajuan) AS tahun,
-							rekap.id_jenis_surat,
-							jenis.nama_jenis_surat, 
-							MONTH(rekap.tanggal_pengajuan) AS bulan,
-							COUNT(rekap.id_rekap_surat) AS jumlah')
-						->where(['YEAR(rekap.tanggal_pengajuan)'=>date('Y')])
-						->join('jenis_surat jenis', 'jenis.id_jenis_surat = rekap.id_jenis_surat', 'left')
-						->group_by('rekap.id_jenis_surat, YEAR(rekap.tanggal_pengajuan), MONTH(rekap.tanggal_pengajuan)')
-						->order_by('rekap.id_jenis_surat, YEAR(rekap.tanggal_pengajuan), MONTH(rekap.tanggal_pengajuan)')
-						->get('rekap_surat rekap');
-	}
+	// public function loadDataGrafik()
+	// {
+	// 	// query load data dari grafik
+	// 	return $this->db->select('YEAR(rekap.tanggal_pengajuan) AS tahun,
+	// 						rekap.id_jenis_surat,
+	// 						jenis.nama_jenis_surat,
+	// 						MONTH(rekap.tanggal_pengajuan) AS bulan,
+	// 						COUNT(rekap.id_rekap_surat) AS jumlah')
+	// 					->where(['YEAR(rekap.tanggal_pengajuan)'=>date('Y')])
+	// 					->join('jenis_surat jenis', 'jenis.id_jenis_surat = rekap.id_jenis_surat', 'left')
+	// 					->group_by('rekap.id_jenis_surat, YEAR(rekap.tanggal_pengajuan), MONTH(rekap.tanggal_pengajuan)')
+	// 					->order_by('rekap.id_jenis_surat, YEAR(rekap.tanggal_pengajuan), MONTH(rekap.tanggal_pengajuan)')
+	// 					->get('rekap_surat rekap');
+	// }
 
 	// function tampil_dataprofil(){
 	// 	$query = $this->db->get('sejarah');

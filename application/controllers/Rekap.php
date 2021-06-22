@@ -28,11 +28,9 @@ class Rekap extends MyBasecontroller {
 	{
 		$bulansaatini = $this->m_read->bulan_saatini();
 		$tahunsaatini = $this->m_read->tahun_saatini();
-		$datasurat = $this->m_read->tampil_datasurat();
 		$data['content']='rekap_v';
 		$data['tahunsaatini']=$tahunsaatini;
 		$data['bulansaatini']=$bulansaatini;
-		$data['datasurat']=$datasurat;
 		$this->load->view('templates/index',$data);
 
 	}
@@ -43,21 +41,21 @@ class Rekap extends MyBasecontroller {
 		$multipelfiled = $this->input->post('subject');
 		$bulan = $this->input->post('bulan');
 		$tahun = $this->input->post('tahun');
+		$ttd = $this->input->post('ttd');
 
 		if ($this->input->post('tampil')) {
 
-			if ($jenis_surat == 0) {
+			if ($jenis_surat == "semua") {
 				$rekaptampil = $this->m_read->rekap_tampil($bulan,$tahun);
 				$bulansaatini = $this->m_read->bulan_saatini();
 				$tahunsaatini = $this->m_read->tahun_saatini();
-				$datasurat = $this->m_read->tampil_datasurat();
 
 				$data['tahunsaatini']=$tahunsaatini;
 				$data['bulansaatini']=$bulansaatini;
 				$data['rekaptampil']=$rekaptampil;
 				$data['rekaptampilarray']=$jenis_surat;
-				$data['datasurat']=$datasurat;
 				$data['datafiledrekapsurat']=$multipelfiled;
+
 				$data['content']='rekap_tampil_v';
 
 				$this->load->view('templates/index',$data);
@@ -67,37 +65,33 @@ class Rekap extends MyBasecontroller {
 				$rekaptampilarray = $this->m_read->rekap_tampil_jenis_surat_array($jenis_surat);
 				$bulansaatini = $this->m_read->bulan_saatini();
 				$tahunsaatini = $this->m_read->tahun_saatini();
-				$datasurat = $this->m_read->tampil_datasurat();
 
 				foreach ($rekaptampilarray as $value) {
-					$datavalue = $value['nama_jenis_surat'];
+					$datavalue = $value['jenis_surat'];
 				}
 
 				$data['tahunsaatini']=$tahunsaatini;
 				$data['bulansaatini']=$bulansaatini;
 				$data['rekaptampil']=$rekaptampil;
 				$data['rekaptampilarray']=$datavalue;
-				$data['datasurat']=$datasurat;
 				$data['datafiledrekapsurat']=$multipelfiled;
 				$data['content']='rekap_tampil_v';
-
 				$this->load->view('templates/index',$data);
 			}
 		}
 
 		if ($this->input->post('cetakpdf')) {
-			if ($jenis_surat == 0) {
+			if ($jenis_surat == "semua") {
 				$rekaptampil = $this->m_read->rekap_tampil($bulan,$tahun);
 				$bulansaatini = $this->m_read->bulan_saatini();
 				$tahunsaatini = $this->m_read->tahun_saatini();
-				$datasurat = $this->m_read->tampil_datasurat();
 
 				$data['tahunsaatini']=$tahunsaatini;
 				$data['bulansaatini']=$bulansaatini;
 				$data['rekaptampil']=$rekaptampil;
 				$data['rekaptampilarray']=$jenis_surat;
-				$data['datasurat']=$datasurat;
 				$data['datafiledrekapsurat']=$multipelfiled;
+				$data['ttd']=$ttd;
 				$data['content']='rekap_tampil_v';
 
 				$this->load->view('templates/rekap_cetakpdf_v',$data);
@@ -107,18 +101,17 @@ class Rekap extends MyBasecontroller {
 				$rekaptampilarray = $this->m_read->rekap_tampil_jenis_surat_array($jenis_surat);
 				$bulansaatini = $this->m_read->bulan_saatini();
 				$tahunsaatini = $this->m_read->tahun_saatini();
-				$datasurat = $this->m_read->tampil_datasurat();
 
 				foreach ($rekaptampilarray as $value) {
-					$datavalue = $value['nama_jenis_surat'];
+					$datavalue = $value['jenis_surat'];
 				}
 
 				$data['tahunsaatini']=$tahunsaatini;
 				$data['bulansaatini']=$bulansaatini;
 				$data['rekaptampil']=$rekaptampil;
 				$data['rekaptampilarray']=$datavalue;
-				$data['datasurat']=$datasurat;
 				$data['datafiledrekapsurat']=$multipelfiled;
+				$data['ttd']=$ttd;
 				$data['content']='rekap_tampil_v';
 
 				$this->load->view('templates/rekap_cetakpdf_v',$data);

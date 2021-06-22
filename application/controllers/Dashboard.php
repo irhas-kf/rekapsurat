@@ -26,11 +26,6 @@ class Dashboard extends MyBasecontroller {
 
 	public function index()
 	{
-
-		// for ($x = 0; $x <= 11; $x++) {
-		//  $data['report'] = $this->m_read->report($x);
-		// //  echo json_encode($data);
-		// }
 		$data['load_grafik'] = $this->loadDataGrafik();
 
 		$data['content']='dashboard_v';
@@ -39,23 +34,22 @@ class Dashboard extends MyBasecontroller {
 
 	public function loadDataGrafik()
 	{
-		$dataGrafik = $this->m_read->loadDataGrafik()->result();
+		$dataGrafik = $this->m_read->grafikatm();
 		$jenis_surat = $this->m_read->tampil_datasurat();
 		$countDefault = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
 		// menata ulang array sesuai kebutuhan untuk data grafik
 		$result_jenissurat = [];
 		foreach($jenis_surat as $keyJ => $valueJ) {
-			$result_jenissurat[$valueJ->id_jenis_surat] = [
-				'id'	=> $valueJ->id_jenis_surat,
-				'name'	=> $valueJ->nama_jenis_surat,
+			$result_jenissurat[$valueJ->jenis_surat] = [
+				'name'	=> $valueJ->jenis_surat,
 				'data'	=> $countDefault
 			];
 		}
 
 		// mengambil 'jumlah' dari masing-masing jenis surat berdasarkan bulan utk diperbarui pada data
 		foreach($dataGrafik as $keyG => $valueG) {
-			$result_jenissurat[$valueG->id_jenis_surat]['data'][$valueG->bulan-1] = $valueG->jumlah;
+			$result_jenissurat[$valueG->jenis_surat]['data'][$valueG->bulan-1] = $valueG->jumlah;
 		}
 
 		return $result_jenissurat;

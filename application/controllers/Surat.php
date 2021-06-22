@@ -29,12 +29,7 @@ class Surat extends MyBasecontroller {
 		//Load session library
   	$this->load->library('session');
 
-		$datafaskes = $this->m_read->tampil_datafaskes();
-		$datasurat = $this->m_read->tampil_datasurat();
-
 		$data['content']='surat_v';
-		$data['datafaskes']=$datafaskes;
-		$data['datasurat']=$datasurat;
 
 		$this->load->view('templates/index',$data);
 	}
@@ -45,29 +40,23 @@ class Surat extends MyBasecontroller {
     $this->load->library('session');
     $this->load->helper('url');
 
-		$tanggal_pengajuan = $this->input->post('tanggal_pengajuan');
-		$nama = $this->input->post('nama');
-		$nkk = $this->input->post('nkk');
-		$nik = $this->input->post('nik');
-		$no_kis = $this->input->post('no_kis');
-		$alamat = $this->input->post('alamat');
-		$faskes = $this->input->post('faskes');
+		$kd_klasifikasi = $this->input->post('kd_klasifikasi');
 		$jenis_surat = $this->input->post('jenis_surat');
-		$keterangan = $this->input->post('keterangan');
+		$tanggal_surat = $this->input->post('tanggal_surat');
+		$nama_surat = $this->input->post('nama_surat');
+		$jumlah_surat = $this->input->post('jumlah_surat');
+		$keterangan_surat = $this->input->post('keterangan_surat');
 
 		$datainsert = array(
-			'id_faskes' => $faskes,
-			'id_jenis_surat' => $jenis_surat,
-			'nik' => $nik,
-			'no_kartu_keluarga' => $nkk,
-			'nama' => $nama,
-			'nomor_kis' => $no_kis,
-			'alamat' => $alamat,
-			'keterangan' => $keterangan,
-			'tanggal_pengajuan' => $tanggal_pengajuan,
+			'kd_klasifikasi' => $kd_klasifikasi,
+			'jenis_surat' => $jenis_surat,
+			'tanggal_surat' => $tanggal_surat,
+			'nama_surat' => $nama_surat,
+			'jumlah_surat' => $jumlah_surat,
+			'keterangan_surat' => $keterangan_surat,
 			);
 
-		$this->m_insert->input_data($datainsert,'rekap_surat');
+		$this->m_insert->input_data($datainsert,'tb_rekap_surat');
 		//add flash data
 		$this->session->set_flashdata('data','data berhasil di input.');
 		redirect('/Surat');

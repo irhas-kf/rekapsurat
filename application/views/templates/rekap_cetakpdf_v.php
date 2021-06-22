@@ -43,7 +43,7 @@ folder instead of downloading all of them to reduce the load. -->
 </head>
 <body>
   <img style="display: block; margin-left: auto; margin-right: auto;" src="<?=base_url();?>img/kopsurat.png">
-  <h4 align="center">Kategori Rekap Surat <?php echo $rekaptampilarray; ?></h4>
+  <h4 align="center">Jenis Rekap Surat <?php echo $rekaptampilarray; ?></h4>
       <div class="">
         <table class="table table-bordered table-striped">
             <thead>
@@ -68,16 +68,15 @@ folder instead of downloading all of them to reduce the load. -->
               </tr>
               <?php } ?>
             </tbody>
-            <tfoot>
-            <tr>
-            <?php
-            foreach($datafiledrekapsurat as $u){
-            ?>
-            <th><?php echo $u ?></th>
-            <?php } ?>
-            </tr>
-            </tfoot>
         </table>
+        <div style="display: flex; justify-content: flex-end;">
+        <h5 align="center" style="padding:60px;">
+          Mojokerto, <?php echo date('d-M-Y'); ?>
+          <br>
+          Kepala Dinas Kesehatan<br><br><br><br><br>
+          <?php echo $ttd; ?>
+        </h5>
+      </div>
       </div>
   <!-- jQuery UI 1.11.4 -->
   <script src="<?=base_url();?>assets/bower_components/jquery-ui/jquery-ui.min.js"></script>

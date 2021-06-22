@@ -4,7 +4,7 @@
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="<?= base_url("rekap") ?>">Rekap</a></li>
-          <li class="breadcrumb-item active">Cetak Surat</li>
+          <li class="breadcrumb-item active">Cetak Arsip Surat</li>
         </ol>
       </div>
     </div>
@@ -19,7 +19,7 @@
 
         <div class="box box-info">
           <div class="box-header with-border">
-            <h3 class="box-title">FORM REKAP LAMPIRAN SURAT</h3>
+            <h3 class="box-title">FORM REKAP ARSIP SURAT</h3>
           </div>
         </div>
 
@@ -48,10 +48,9 @@
                     <div class="form-group">
                       <label>Pilih Jenis Surat</label>
                       <select class="form-control" name="jenis_surat" required="">
-                        <option value="Semua Jenis Surat">--- jenis surat bisa dipilih/tidak ---</option>
-                        <?php foreach($datasurat as $s){?>
-                          <option value="<?php echo $s->id_jenis_surat ?>"><?php echo $s->nama_jenis_surat ?></option>
-                        <?php } ?>
+                        <option value="semua"> SEMUA </option>
+                        <option value="masuk"> MASUK </option>
+                        <option value="keluar"> KELUAR </option>
                       </select>
                   </div>
                 <!-- BATAS TABEL REKAP UNTUK MENAMPILKAN FORM JENIS SURAT-->
@@ -60,15 +59,11 @@
                       <label>Pilih yang akan ditampilkan *</label>
                       <select name="subject[]" multiple size=9 class="form-control select2" data-placeholder="Pilih Rekap"
                       style="width: 100%;" required>
-                      <option value="tanggal_pengajuan">Tanggal Pengajuan</option>
-                      <option value="nama">Nama</option>
-                      <option value="nik">NIK</option>
-                      <option value="no_kartu_keluarga">Nomor KK</option>
-                      <option value="nomor_kis">Nomor KIS</option>
-                      <option value="alamat">Alamat</option>
-                      <option value="nama_faskes">Faskes</option>
-                      <option value="nama_jenis_surat">Jenis Surat</option>
-                      <option value="keterangan">Keterangan</option>
+                      <option value="kd_klasifikasi">kd_klasifikasi</option>
+                      <option value="nama_surat">nama_surat</option>
+                      <option value="tanggal_surat">tanggal_surat</option>
+                      <option value="jumlah_surat">jumlah_surat</option>
+                      <option value="keterangan_surat">keterangan_surat</option>
                     </select>
                   </div>
 
@@ -104,6 +99,15 @@
                         <?php
                       }
                       ?>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Pilih TTD *</label>
+                    <select name="ttd" class="form-control" data-placeholder="Pilih Bulan">
+                      <style="width: 100%;">
+                        <option value="irhas">irhas</option>
+                        <option value="wahyu">wahyu</option>
                     </select>
                   </div>
 

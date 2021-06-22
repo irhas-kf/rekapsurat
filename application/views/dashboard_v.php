@@ -48,12 +48,12 @@
     <section class="box-body">
       <div class="box box-info">
             <div class="box-header with-border">
-                <div class="card-header">
+                <!-- <div class="card-header">
                     <h3 class="card-title">
                       <i class="far fa-chart-bar"></i>
                       Grafik Rekap Surat per Bulan
                     </h3>
-                </div>
+                </div> -->
             <div class="card-body">
 
                     <figure class="highcharts-figure">
@@ -95,10 +95,10 @@ Highcharts.chart('container', {
     type: 'column'
   },
   title: {
-    text: 'Capaian Surat Bulanan'
+    text: 'Grafik Surat Masuk & Keluar'
   },
   subtitle: {
-    text: 'Sumber: Admin'
+    text: 'Sumber: Database per Tahun'
   },
   xAxis: {
     categories: [

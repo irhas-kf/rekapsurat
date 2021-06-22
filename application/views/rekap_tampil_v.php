@@ -36,7 +36,7 @@
                   <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
                 </div>
               </div>
-
+              <!-- TABEL REKAP UNTUK MENAMPILKAN FORM JENIS SURAT-->
               <!-- /.box-header -->
               <div class="box-body">
 
@@ -44,31 +44,29 @@
 
                   <!-- /.col -->
                   <div class="col-md-12">
+
                     <div class="form-group">
                       <label>Pilih Jenis Surat</label>
                       <select class="form-control" name="jenis_surat" required="">
-                        <option value="Semua Jenis Surat">--- jenis surat bisa dipilih/tidak ---</option>
-                        <?php foreach($datasurat as $s){?>
-                          <option value="<?php echo $s->id_jenis_surat ?>"><?php echo $s->nama_jenis_surat ?></option>
-                        <?php } ?>
+                        <option value="semua"> SEMUA </option>
+                        <option value="masuk"> MASUK </option>
+                        <option value="keluar"> KELUAR </option>
                       </select>
                   </div>
+                <!-- BATAS TABEL REKAP UNTUK MENAMPILKAN FORM JENIS SURAT-->
 
                     <div class="form-group">
                       <label>Pilih yang akan ditampilkan *</label>
                       <select name="subject[]" multiple size=9 class="form-control select2" data-placeholder="Pilih Rekap"
                       style="width: 100%;" required>
-                      <option value="tanggal_pengajuan">Tanggal Pengajuan</option>
-                      <option value="nama">Nama</option>
-                      <option value="nik">NIK</option>
-                      <option value="no_kartu_keluarga">Nomor KK</option>
-                      <option value="nomor_kis">Nomor KIS</option>
-                      <option value="alamat">Alamat</option>
-                      <option value="nama_faskes">Faskes</option>
-                      <option value="nama_jenis_surat">Jenis Surat</option>
-                      <option value="keterangan">Keterangan</option>
+                      <option value="kd_klasifikasi">kd_klasifikasi</option>
+                      <option value="nama_surat">nama_surat</option>
+                      <option value="tanggal_surat">tanggal_surat</option>
+                      <option value="jumlah_surat">jumlah_surat</option>
+                      <option value="keterangan_surat">keterangan_surat</option>
                     </select>
                   </div>
+
                   <!-- /.form-group -->
                   <div class="form-group">
                     <label>Pilih Cetak per Bulan *</label>
@@ -105,12 +103,20 @@
                   </div>
 
                   <div class="form-group">
+                    <label>Pilih TTD *</label>
+                    <select name="ttd" class="form-control" data-placeholder="Pilih Bulan">
+                      <style="width: 100%;">
+                        <option value="irhas">irhas</option>
+                        <option value="wahyu">wahyu</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
                     <button type="submit" name="tampil" value="tampil" class="btn btn-app"> <i class="fa fa-eye"></i> Tampilkan </button>
-                    <button type="submit" name="cetakpdf" value="cetakpdf" class="btn btn-app"> <i class="fa fa-file"></i> Cetak/PDF </button>
+                    <a href="#" target="_blank"><button type="submit" name="cetakpdf" value="cetakpdf" class="btn btn-app"> <i class="fa fa-print"></i> Cetak/PDF </button></a>
                     <!-- <button type="submit" name="excel" value="excel" class="btn btn-app"> <i class="fa fa-file"></i> EXCEL </button>
                     <button type="submit" name="word" value="word" class="btn btn-app"> <i class="fa fa-file"></i> WORD </button> -->
                   </div>
-
                 </div>
 
                 <!-- /.form-group -->
