@@ -40,9 +40,9 @@ class M_read extends CI_Model{
 		return $query->result();
 	}
 
-	function grafikatm(){
+	function grafikatm($tahun){
 		$query = $this->db->query("SELECT YEAR(tanggal_surat) AS tahun, MONTH(tanggal_surat) AS bulan, COUNT(id_rekap_surat) AS jumlah, jenis_surat FROM tb_rekap_surat
-		WHERE YEAR(tanggal_surat)='2021'");
+		WHERE YEAR(tanggal_surat)=$tahun");
 		return $query->result();
     }
 

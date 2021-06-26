@@ -34,7 +34,8 @@ class Dashboard extends MyBasecontroller {
 
 	public function loadDataGrafik()
 	{
-		$dataGrafik = $this->m_read->grafikatm();
+		$tahun = date('Y');
+		$dataGrafik = $this->m_read->grafikatm($tahun);
 		$jenis_surat = $this->m_read->tampil_datasurat();
 		$countDefault = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
