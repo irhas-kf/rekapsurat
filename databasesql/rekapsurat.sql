@@ -1,6 +1,6 @@
 /*
 SQLyog Ultimate v10.42 
-MySQL - 5.5.5-10.4.11-MariaDB : Database - mahasiswa
+MySQL - 5.5.5-10.4.11-MariaDB : Database - rekapsurat
 *********************************************************************
 */
 
@@ -12,79 +12,9 @@ MySQL - 5.5.5-10.4.11-MariaDB : Database - mahasiswa
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`mahasiswa` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`rekapsurat` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
 
-USE `mahasiswa`;
-
-/*Table structure for table `faskes` */
-
-DROP TABLE IF EXISTS `faskes`;
-
-CREATE TABLE `faskes` (
-  `id_faskes` int(11) NOT NULL AUTO_INCREMENT,
-  `nama_faskes` varchar(50) NOT NULL,
-  PRIMARY KEY (`id_faskes`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
-
-/*Data for the table `faskes` */
-
-insert  into `faskes`(`id_faskes`,`nama_faskes`) values (1,'UPTD Puskesmas Blooto'),(2,'UPTD Puskesmas Gedongan'),(3,'UPTD Puskesmas Kedundung'),(4,'UPTD Puskesmas Kranggan'),(5,'UPTD Puskesmas Mentikan'),(6,'UPTD Puskesmas Wates');
-
-/*Table structure for table `jenis_surat` */
-
-DROP TABLE IF EXISTS `jenis_surat`;
-
-CREATE TABLE `jenis_surat` (
-  `id_jenis_surat` int(20) NOT NULL AUTO_INCREMENT,
-  `nama_jenis_surat` varchar(60) NOT NULL,
-  PRIMARY KEY (`id_jenis_surat`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
-
-/*Data for the table `jenis_surat` */
-
-insert  into `jenis_surat`(`id_jenis_surat`,`nama_jenis_surat`) values (1,'PBID Bayi Baru lahir dan Balita Kurang Dari 1 Tahun'),(2,'PBID Penyakit Kronis'),(3,'PBID Ibu hamil'),(4,'PBID ex Mandiri'),(5,'Penonaktifan PBID');
-
-/*Table structure for table `posting` */
-
-DROP TABLE IF EXISTS `posting`;
-
-CREATE TABLE `posting` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `judul` varchar(255) NOT NULL,
-  `konten` text DEFAULT NULL,
-  `id_user` int(11) NOT NULL DEFAULT 1,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-
-/*Data for the table `posting` */
-
-insert  into `posting`(`id`,`judul`,`konten`,`id_user`) values (1,'Posting 1x','Hello World !',3);
-
-/*Table structure for table `rekap_surat` */
-
-DROP TABLE IF EXISTS `rekap_surat`;
-
-CREATE TABLE `rekap_surat` (
-  `id_rekap_surat` int(10) NOT NULL AUTO_INCREMENT,
-  `id_faskes` int(11) DEFAULT NULL,
-  `id_jenis_surat` int(11) DEFAULT NULL,
-  `nik` char(16) DEFAULT NULL,
-  `no_kartu_keluarga` char(16) NOT NULL,
-  `nama` varchar(32) NOT NULL,
-  `nomor_kis` varchar(32) NOT NULL,
-  `alamat` text NOT NULL,
-  `keterangan` text NOT NULL,
-  `tanggal_pengajuan` date NOT NULL,
-  PRIMARY KEY (`id_rekap_surat`),
-  KEY `id_faskes` (`id_faskes`),
-  KEY `id_jenis_surat` (`id_jenis_surat`),
-  CONSTRAINT `rekap_surat_ibfk_1` FOREIGN KEY (`id_faskes`) REFERENCES `faskes` (`id_faskes`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `rekap_surat_ibfk_2` FOREIGN KEY (`id_jenis_surat`) REFERENCES `jenis_surat` (`id_jenis_surat`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4;
-
-/*Data for the table `rekap_surat` */
-
-insert  into `rekap_surat`(`id_rekap_surat`,`id_faskes`,`id_jenis_surat`,`nik`,`no_kartu_keluarga`,`nama`,`nomor_kis`,`alamat`,`keterangan`,`tanggal_pengajuan`) values (26,1,1,'3456098458903481','3506374987450001','risa','3290459813','kediri','test','2021-05-27'),(27,2,2,'3456098458903486','3506374987450001','deby','ab322123','test','test','2021-05-27'),(28,5,4,'3456098458903485','3506374987450004','irhas','3290459812','d','d','2021-05-27'),(29,4,3,'3456098458903488','3506374987450001','sinta','3290459821','dr','t','2021-05-27'),(30,2,2,'3456098458903486','3506374987450001','sinta','3290459813','ww','ww','2021-05-27'),(31,5,3,'3456098458903486','3506374987450004','deby','ab322123','sw','ww','2021-05-27'),(32,4,3,'3456098458903485','3506374987450002','risa','ab322123','d','s','2021-05-27'),(33,3,1,'3456098458903485','3506374987450001','fadila','ab322123','ww','ww','2021-05-27'),(34,1,2,'3456098458903488','3506374987450002','sinta','ab322123','e','e','2021-05-27');
+USE `rekapsurat`;
 
 /*Table structure for table `tb_rekap_surat` */
 
@@ -99,11 +29,11 @@ CREATE TABLE `tb_rekap_surat` (
   `keterangan_surat` text DEFAULT NULL,
   `jenis_surat` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`id_rekap_surat`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `tb_rekap_surat` */
 
-insert  into `tb_rekap_surat`(`id_rekap_surat`,`kd_klasifikasi`,`nama_surat`,`tanggal_surat`,`jumlah_surat`,`keterangan_surat`,`jenis_surat`) values (2,'441/13/417.302/2021','Permohonan setting router','2021-01-05','1','Kadiskominfo','keluar'),(3,'B-35761.001/BPS/9280/01/2020','Survei Persepsi dan Kualitas Data(SPDK) Triwulan IV Tahun 2020','2021-01-05','1','BPS kota Mojokerto','masuk');
+insert  into `tb_rekap_surat`(`id_rekap_surat`,`kd_klasifikasi`,`nama_surat`,`tanggal_surat`,`jumlah_surat`,`keterangan_surat`,`jenis_surat`) values (2,'441/13/417.302/2021','Permohonan setting router','2021-01-05','1','Kadiskominfo','keluar'),(3,'B-35761.001/BPS/9280/01/2020','Survei Persepsi dan Kualitas Data(SPDK) Triwulan IV Tahun 2020','2021-01-05','1','BPS kota Mojokerto','masuk'),(4,'441/13/417.302/2021','Permohonan setting swithub','2021-06-26','1','diskominfo','keluar');
 
 /*Table structure for table `user_data` */
 
