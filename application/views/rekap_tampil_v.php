@@ -23,7 +23,7 @@
           </div>
         </div>
 
-        <form action="<?=base_url('Rekap/aksi_tampil');?>" method="post">
+        <form action="<?=base_url('Rekap/aksi_tampil');?>" method="post" target="_blank">
 
           <div class="col-md-3">
 
@@ -106,8 +106,7 @@
                     <label>Pilih TTD *</label>
                     <select name="ttd" class="form-control" data-placeholder="Pilih Bulan">
                       <style="width: 100%;">
-                        <option value="irhas">irhas</option>
-                        <option value="wahyu">wahyu</option>
+                        <option value="IKA MARTA SANDY, SKM">IKA MARTA SANDY, SKM</option>
                     </select>
                   </div>
 
