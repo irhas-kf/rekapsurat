@@ -73,8 +73,9 @@ folder instead of downloading all of them to reduce the load. -->
         <h5 align="center" style="padding:60px;">
           Mojokerto, <?php echo date('d-M-Y'); ?>
           <br>
-          Kepala Dinas Kesehatan<br><br><br><br><br>
-          <?php echo $ttd; ?>
+          Kepala Sub Bidang Penyusunan Program<br><br><br><br><br>
+          <?php echo $ttd; ?><br>
+          NIP : 1986032220110112007
         </h5>
       </div>
       </div>
