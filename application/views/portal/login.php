@@ -22,7 +22,7 @@
   <link rel="stylesheet" href="<?=base_url('assets/dist/css/AdminLTE.min.css');?>">
 
 </head>
-<body class="hold-transition login-page">
+<body class="hold-transition login-page" style="background-image: url('<?=base_url('img/bg.jpeg');?>'); background-repeat: no-repeat; background-attachment: fixed; background-position: center;">
 
 <?php if($this->session->userdata('admin')==""): ?>
 <div class="login-box">
